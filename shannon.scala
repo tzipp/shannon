@@ -7,11 +7,11 @@ def shannonEntropy(str: String): Double = {
   }
 
   val len: Double = str.length
-  var sum = 0.0
-  for ((k, v) <- count) {
-      sum += (v / len) * scala.math.log(v/len) / scala.math.log(2)
-    }
-  -1 * sum
+  (for {
+      v <- count.values
+      iter = (v / len) * scala.math.log(v/len) / scala.math.log(2)
+    } yield iter)
+    .sum * (-1)
 }
 
 println(shannonEntropy("Hello, world!"))
